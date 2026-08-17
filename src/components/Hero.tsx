@@ -26,10 +26,19 @@ export default function Hero() {
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         className="relative z-20 flex-1 px-6 sm:px-8 md:px-16 pt-12 md:pt-16 flex flex-col items-start"
       >
-        <h1 className="font-display text-[32px] sm:text-[42px] md:text-[56px] font-medium leading-[1.1] md:leading-[1.05] tracking-tight text-[#0a1b33]">
+        <div className="flex flex-wrap items-center gap-2 mb-5">
+          <span className="inline-flex items-center bg-white/90 backdrop-blur-md border border-slate-200/60 rounded-full px-4 py-1.5 text-[10px] sm:text-[11px] font-semibold uppercase tracking-wide text-slate-500">
+            Diseño &amp; desarrollo web
+          </span>
+          <span className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-md border border-slate-200/60 rounded-full px-4 py-1.5 text-[10px] sm:text-[11px] font-medium text-slate-500">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#0a152d]" />
+            Sin permanencia · Respuesta en 24h
+          </span>
+        </div>
+        <h1 className="font-serif text-[32px] sm:text-[44px] md:text-[58px] font-medium leading-[1.08] tracking-tight text-[#0a1b33]">
           El punto de partida
           <br />
-          de tu presencia online
+          <em className="italic">de tu presencia online</em>
         </h1>
         <p className="mt-5 max-w-[420px] font-sans text-[14px] md:text-[15px] text-[#64748b] leading-relaxed">
           Diseño y desarrollo de páginas web a medida: código limpio, rápido
