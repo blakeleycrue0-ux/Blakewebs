@@ -1,13 +1,16 @@
 import { Home, Layers, Route, Phone } from "lucide-react";
 import { PHONE_TEL } from "../lib/contact";
-
-const ITEMS = [
-  { href: "#top", label: "Inicio", icon: Home },
-  { href: "#packs", label: "Packs", icon: Layers },
-  { href: "#proceso", label: "Proceso", icon: Route },
-];
+import { useLanguage } from "../lib/i18n";
 
 export default function MobileTabBar() {
+  const { t } = useLanguage();
+
+  const items = [
+    { href: "#top", label: t.tabbar.inicio, icon: Home },
+    { href: "#packs", label: t.tabbar.packs, icon: Layers },
+    { href: "#proceso", label: t.tabbar.proceso, icon: Route },
+  ];
+
   return (
     <nav
       aria-label="Navegación inferior"
@@ -15,7 +18,7 @@ export default function MobileTabBar() {
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
       <div className="grid grid-cols-4 h-16">
-        {ITEMS.map(({ href, label, icon: Icon }) => (
+        {items.map(({ href, label, icon: Icon }) => (
           <a
             key={label}
             href={href}
@@ -30,7 +33,7 @@ export default function MobileTabBar() {
           className="flex flex-col items-center justify-center gap-1 text-slate-400 active:text-[#0a1b33] transition-colors"
         >
           <Phone className="w-5 h-5" strokeWidth={1.8} />
-          <span className="text-[10px] font-medium">Llamar</span>
+          <span className="text-[10px] font-medium">{t.tabbar.llamar}</span>
         </a>
       </div>
     </nav>

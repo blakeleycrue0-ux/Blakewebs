@@ -1,6 +1,10 @@
+import { Fragment } from "react";
 import Reveal from "./Reveal";
+import { useLanguage } from "../lib/i18n";
 
 export default function Showcase() {
+  const { t } = useLanguage();
+
   return (
     <section className="mt-16 md:mt-24 max-w-[1400px] mx-auto px-2">
       <Reveal>
@@ -18,13 +22,14 @@ export default function Showcase() {
           </div>
         </div>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[11px] md:text-[12px] font-semibold uppercase tracking-wide text-slate-400">
-          <span>Diseño web</span>
-          <span className="w-1 h-1 rounded-full bg-slate-300" aria-hidden="true" />
-          <span>SEO</span>
-          <span className="w-1 h-1 rounded-full bg-slate-300" aria-hidden="true" />
-          <span>Responsive</span>
-          <span className="w-1 h-1 rounded-full bg-slate-300" aria-hidden="true" />
-          <span>Rendimiento</span>
+          {t.showcase.tags.map((tag, i) => (
+            <Fragment key={tag}>
+              {i > 0 && (
+                <span className="w-1 h-1 rounded-full bg-slate-300" aria-hidden="true" />
+              )}
+              <span>{tag}</span>
+            </Fragment>
+          ))}
         </div>
       </Reveal>
     </section>
