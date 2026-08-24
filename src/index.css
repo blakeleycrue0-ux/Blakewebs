@@ -1,32 +1,67 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600&family=Fraunces:ital,wght@0,500;0,600;1,500;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-sans: "Inter", "Segoe UI", system-ui, sans-serif;
-  --font-display: "Outfit", "Inter", sans-serif;
-  --font-serif: "Fraunces", "Georgia", serif;
 }
 
-html {
-  scroll-behavior: smooth;
+:root {
+  --bg: #faf9f6;
+  --surface: #ffffff;
+  --text: #17140f;
+  --text-secondary: #8a8478;
+  --text-tertiary: #b3ac9e;
+  --border: #e8e4dc;
+  --accent: #c1502e;
+  --accent-soft: #c1502e1a;
+  --danger: #b5443a;
+  --danger-soft: #b5443a1a;
 }
 
-html, body {
-  background: #f9fafb;
+:root[data-theme="dark"] {
+  --bg: #16130f;
+  --surface: #1e1a15;
+  --text: #f5f2ec;
+  --text-secondary: #9c978c;
+  --text-tertiary: #6b665c;
+  --border: #2c2820;
+  --accent: #e07a52;
+  --accent-soft: #e07a521f;
+  --danger: #d97066;
+  --danger-soft: #d970661f;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #16130f;
+    --surface: #1e1a15;
+    --text: #f5f2ec;
+    --text-secondary: #9c978c;
+    --text-tertiary: #6b665c;
+    --border: #2c2820;
+    --accent: #e07a52;
+    --accent-soft: #e07a521f;
+    --danger: #d97066;
+    --danger-soft: #d970661f;
   }
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--text);
 }
 
 body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none;
 }
 
-@keyframes marquee-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
 }

@@ -22,22 +22,22 @@ export default class ErrorBoundary extends Component<
       return (
         <div
           style={{
-            minHeight: "100vh",
+            minHeight: "100dvh",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             fontFamily: "sans-serif",
             textAlign: "center",
             padding: 24,
-            background: "#f9fafb",
+            background: "#faf9f6",
           }}
         >
           <div>
-            <p style={{ fontSize: 18, fontWeight: 600, color: "#0a1b33", marginBottom: 8 }}>
-              Blakewebs
+            <p style={{ fontSize: 18, fontWeight: 600, color: "#17140f", marginBottom: 8 }}>
+              Pace
             </p>
-            <p style={{ fontSize: 14, color: "#64748b" }}>
-              Estamos actualizando la página. Vuelve a intentarlo en unos minutos.
+            <p style={{ fontSize: 14, color: "#8a8478" }}>
+              Something went wrong. Please reload the page.
             </p>
           </div>
         </div>
