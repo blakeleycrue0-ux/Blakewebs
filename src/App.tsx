@@ -6,8 +6,10 @@ import type { Expense, Category } from "./lib/types";
 import BottomNav from "./components/BottomNav";
 import AddExpenseSheet from "./components/AddExpenseSheet";
 import CategorySheet from "./components/CategorySheet";
+import Login from "./screens/Login";
 import Onboarding from "./screens/Onboarding";
 import Home from "./screens/Home";
+import Goals from "./screens/Goals";
 import Activity from "./screens/Activity";
 import Categories from "./screens/Categories";
 import Settings from "./screens/Settings";
@@ -29,6 +31,10 @@ export default function App() {
     }
     wasInitialized.current = state.initialized;
   }, [state.initialized]);
+
+  if (!state.authUser) {
+    return <Login />;
+  }
 
   if (!state.initialized) {
     return <Onboarding />;
@@ -56,7 +62,10 @@ export default function App() {
 
   return (
     <div className="min-h-dvh" style={{ background: "var(--bg)" }}>
-      {screen === "home" && <Home onAddExpense={openAddExpense} />}
+      {screen === "home" && (
+        <Home onAddExpense={openAddExpense} onOpenGoals={() => setScreen("goals")} />
+      )}
+      {screen === "goals" && <Goals />}
       {screen === "activity" && (
         <Activity onEditExpense={openEditExpense} onAddExpense={openAddExpense} />
       )}

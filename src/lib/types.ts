@@ -26,11 +26,51 @@ export type Expense = {
 
 export type Theme = "light" | "dark" | "system";
 
+export type AuthProvider = "google" | "email";
+
+export type AuthUser = {
+  provider: AuthProvider;
+  name: string;
+  email: string;
+  initials: string;
+};
+
+export type GoalEmoji =
+  | "✈️"
+  | "🏖️"
+  | "🎁"
+  | "🏠"
+  | "🚗"
+  | "💍"
+  | "🎓"
+  | "💻"
+  | "🏥"
+  | "🐣";
+
+export type SavingsGoal = {
+  id: string;
+  name: string;
+  emoji: GoalEmoji;
+  targetAmount: number;
+  targetDate?: string; // ISO date, optional
+};
+
+export type Contribution = {
+  id: string;
+  goalId: string;
+  amount: number;
+  note?: string;
+  date: string; // ISO timestamp
+};
+
 export type AppState = {
+  authUser: AuthUser | null;
   initialized: boolean;
   userName: string;
   monthlyBudget: number;
   categories: Category[];
   expenses: Expense[];
+  goals: SavingsGoal[];
+  contributions: Contribution[];
   theme: Theme;
 };

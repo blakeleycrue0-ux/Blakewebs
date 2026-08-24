@@ -1,8 +1,9 @@
-import { Home, Activity, LayoutGrid, Settings } from "lucide-react";
+import { Home, PiggyBank, Activity, LayoutGrid, Settings } from "lucide-react";
 import type { Screen } from "../lib/nav";
 
 const TABS: { key: Screen; label: string; icon: typeof Home }[] = [
   { key: "home", label: "Home", icon: Home },
+  { key: "goals", label: "Goals", icon: PiggyBank },
   { key: "activity", label: "Activity", icon: Activity },
   { key: "categories", label: "Categories", icon: LayoutGrid },
   { key: "settings", label: "Settings", icon: Settings },
@@ -25,7 +26,7 @@ export default function BottomNav({
       }}
       aria-label="Primary"
     >
-      <div className="max-w-md mx-auto grid grid-cols-4 h-16">
+      <div className="max-w-md mx-auto grid grid-cols-5 h-16">
         {TABS.map(({ key, label, icon: Icon }) => {
           const isActive = active === key;
           return (
@@ -42,7 +43,7 @@ export default function BottomNav({
                 style={{ color: isActive ? "var(--text)" : "var(--text-tertiary)" }}
               />
               <span
-                className="text-[10.5px] font-medium"
+                className="text-[9.5px] font-medium"
                 style={{ color: isActive ? "var(--text)" : "var(--text-tertiary)" }}
               >
                 {label}

@@ -1,14 +1,21 @@
 import { useMemo, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ChevronRight as ArrowRight } from "lucide-react";
 import { useStore } from "../lib/store";
-import { expensesForMonth, totalSpent, categoryProgress } from "../lib/selectors";
+import { expensesForMonth, totalSpent, categoryProgress, goalProgress } from "../lib/selectors";
 import { formatEUR, monthLabel, greeting } from "../lib/format";
 import AnimatedNumber from "../components/AnimatedNumber";
 import ProgressBar from "../components/ProgressBar";
 import CategoryRow from "../components/CategoryRow";
 import EmptyState from "../components/EmptyState";
+import GoalRing from "../components/GoalRing";
 
-export default function Home({ onAddExpense }: { onAddExpense: () => void }) {
+export default function Home({
+  onAddExpense,
+  onOpenGoals,
+}: {
+  onAddExpense: () => void;
+  onOpenGoals: () => void;
+}) {
   const { state } = useStore();
   const [viewedMonth, setViewedMonth] = useState(() => new Date());
 
@@ -27,6 +34,10 @@ export default function Home({ onAddExpense }: { onAddExpense: () => void }) {
   const categories = useMemo(
     () => categoryProgress(state.categories, monthExpenses),
     [state.categories, monthExpenses]
+  );
+  const goals = useMemo(
+    () => goalProgress(state.goals, state.contributions),
+    [state.goals, state.contributions]
   );
 
   function changeMonth(delta: number) {
@@ -78,6 +89,44 @@ export default function Home({ onAddExpense }: { onAddExpense: () => void }) {
       </p>
 
       <ProgressBar ratio={ratio} isOver={remaining < 0} height="h-1.5" className="mb-9" />
+
+      {goals.length > 0 && (
+        <div className="mb-9">
+          <button
+            type="button"
+            onClick={onOpenGoals}
+            className="w-full flex items-center justify-between mb-2.5"
+          >
+            <span
+              className="text-[12.5px] font-semibold uppercase tracking-wide"
+              style={{ color: "var(--text-tertiary)" }}
+            >
+              Goals
+            </span>
+            <ArrowRight className="w-3.5 h-3.5" style={{ color: "var(--text-tertiary)" }} />
+          </button>
+          <div className="flex gap-3 overflow-x-auto -mx-5 px-5 pb-1">
+            {goals.map((g) => (
+              <button
+                key={g.id}
+                type="button"
+                onClick={onOpenGoals}
+                className="flex flex-col items-center gap-1.5 shrink-0 w-16"
+              >
+                <GoalRing ratio={g.ratio} size={48}>
+                  <span className="text-[16px]">{g.emoji}</span>
+                </GoalRing>
+                <span
+                  className="text-[11px] font-medium truncate w-full text-center"
+                  style={{ color: "var(--text-secondary)" }}
+                >
+                  {g.name}
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       {monthExpenses.length === 0 ? (
         <EmptyState

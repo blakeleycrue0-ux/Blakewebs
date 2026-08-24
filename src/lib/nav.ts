@@ -1,1 +1,1 @@
-export type Screen = "home" | "activity" | "categories" | "settings";
+export type Screen = "home" | "goals" | "activity" | "categories" | "settings";
