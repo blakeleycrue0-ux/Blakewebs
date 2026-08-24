@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { LogOut } from "lucide-react";
 import { useStore } from "../lib/store";
 import type { Theme } from "../lib/types";
 import { cn } from "../lib/cn";
@@ -10,7 +11,7 @@ const THEMES: { key: Theme; label: string }[] = [
 ];
 
 export default function Settings() {
-  const { state, setUserName, setMonthlyBudget, setTheme, reset } = useStore();
+  const { state, setUserName, setMonthlyBudget, setTheme, reset, logout } = useStore();
   const [name, setName] = useState(state.userName);
   const [budget, setBudget] = useState(String(state.monthlyBudget));
 
@@ -25,8 +26,14 @@ export default function Settings() {
   }
 
   function handleReset() {
-    if (window.confirm("This will erase all your Pace data on this device. Continue?")) {
+    if (window.confirm("This will erase all your Pace data on this device, including your login. Continue?")) {
       reset();
+    }
+  }
+
+  function handleLogout() {
+    if (window.confirm("Log out? Your data stays on this device.")) {
+      logout();
     }
   }
 
@@ -35,6 +42,28 @@ export default function Settings() {
       <h1 className="text-[22px] font-semibold mb-6" style={{ color: "var(--text)" }}>
         Settings
       </h1>
+
+      {state.authUser && (
+        <div
+          className="flex items-center gap-3 rounded-2xl border p-4 mb-7"
+          style={{ borderColor: "var(--border)", background: "var(--surface)" }}
+        >
+          <div
+            className="w-11 h-11 rounded-full flex items-center justify-center text-[14px] font-semibold shrink-0"
+            style={{ background: "var(--accent-soft)", color: "var(--accent)" }}
+          >
+            {state.authUser.initials}
+          </div>
+          <div className="min-w-0">
+            <p className="text-[14.5px] font-medium truncate" style={{ color: "var(--text)" }}>
+              {state.authUser.name}
+            </p>
+            <p className="text-[12.5px] truncate" style={{ color: "var(--text-tertiary)" }}>
+              {state.authUser.email}
+            </p>
+          </div>
+        </div>
+      )}
 
       <p className="text-[12.5px] font-semibold uppercase tracking-wide mb-2" style={{ color: "var(--text-tertiary)" }}>
         Profile
@@ -92,6 +121,16 @@ export default function Settings() {
           );
         })}
       </div>
+
+      <button
+        type="button"
+        onClick={handleLogout}
+        className="w-full flex items-center justify-center gap-1.5 rounded-full py-3 mb-3 text-[13.5px] font-medium border"
+        style={{ borderColor: "var(--border)", color: "var(--text)" }}
+      >
+        <LogOut className="w-3.5 h-3.5" />
+        Log out
+      </button>
 
       <button
         type="button"

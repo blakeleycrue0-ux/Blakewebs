@@ -1,4 +1,4 @@
-import type { AppState, Category, Expense } from "./types";
+import type { AppState, Category, Contribution, Expense, SavingsGoal } from "./types";
 
 function daysAgo(n: number): string {
   const d = new Date();
@@ -7,7 +7,21 @@ function daysAgo(n: number): string {
   return d.toISOString();
 }
 
-const CATEGORIES: Category[] = [
+export function createEmptyState(): AppState {
+  return {
+    authUser: null,
+    initialized: false,
+    userName: "",
+    monthlyBudget: 0,
+    categories: [],
+    expenses: [],
+    goals: [],
+    contributions: [],
+    theme: "system",
+  };
+}
+
+const DEMO_CATEGORIES: Category[] = [
   { id: "cat-groceries", name: "Groceries", icon: "groceries", budget: 300 },
   { id: "cat-eating-out", name: "Eating out", icon: "eatingOut", budget: 150 },
   { id: "cat-transport", name: "Transport", icon: "transport", budget: 100 },
@@ -23,7 +37,7 @@ const CATEGORIES: Category[] = [
   { id: "cat-other", name: "Other", icon: "other", budget: 50 },
 ];
 
-const EXPENSES: Omit<Expense, "id">[] = [
+const DEMO_EXPENSES: Omit<Expense, "id">[] = [
   { categoryId: "cat-groceries", amount: 34.72, merchant: "Mercadona", date: daysAgo(0) },
   { categoryId: "cat-transport", amount: 12.4, merchant: "Uber", date: daysAgo(0) },
   { categoryId: "cat-eating-out", amount: 18.5, merchant: "Glovo", date: daysAgo(0), note: "Lunch" },
@@ -49,13 +63,31 @@ const EXPENSES: Omit<Expense, "id">[] = [
   { categoryId: "cat-other", amount: 82.5, merchant: "IKEA", date: daysAgo(9) },
 ];
 
-export function createSeedState(): AppState {
+const DEMO_GOALS: SavingsGoal[] = [
+  { id: "goal-lisbon", name: "Trip to Lisbon", emoji: "✈️", targetAmount: 900, targetDate: daysAgo(-70) },
+  { id: "goal-laptop", name: "New laptop", emoji: "💻", targetAmount: 1200 },
+  { id: "goal-emergency", name: "Emergency fund", emoji: "🏥", targetAmount: 2000 },
+];
+
+const DEMO_CONTRIBUTIONS: Omit<Contribution, "id">[] = [
+  { goalId: "goal-lisbon", amount: 200, date: daysAgo(28) },
+  { goalId: "goal-lisbon", amount: 150, date: daysAgo(14) },
+  { goalId: "goal-lisbon", amount: 100, date: daysAgo(2), note: "Sold old bike" },
+  { goalId: "goal-laptop", amount: 300, date: daysAgo(20) },
+  { goalId: "goal-emergency", amount: 500, date: daysAgo(40) },
+  { goalId: "goal-emergency", amount: 250, date: daysAgo(10) },
+];
+
+export function createDemoState(): AppState {
   return {
+    authUser: { provider: "email", name: "Alex Rivera", email: "alex@example.com", initials: "AR" },
     initialized: true,
     userName: "Alex",
     monthlyBudget: 1200,
-    categories: CATEGORIES,
-    expenses: EXPENSES.map((e, i) => ({ ...e, id: `exp-seed-${i}` })),
+    categories: DEMO_CATEGORIES,
+    expenses: DEMO_EXPENSES.map((e, i) => ({ ...e, id: `exp-demo-${i}` })),
+    goals: DEMO_GOALS,
+    contributions: DEMO_CONTRIBUTIONS.map((c, i) => ({ ...c, id: `contrib-demo-${i}` })),
     theme: "system",
   };
 }
