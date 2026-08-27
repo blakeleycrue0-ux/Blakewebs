@@ -137,6 +137,7 @@ const es = {
   },
   footer: {
     rights: "Blakewebs © 2026",
+    privacy: "Política de Privacidad",
   },
 };
 
@@ -269,6 +270,7 @@ const en: typeof es = {
   },
   footer: {
     rights: "Blakewebs © 2026",
+    privacy: "Privacy Policy",
   },
 };
 
