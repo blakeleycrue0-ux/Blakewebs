@@ -64,11 +64,11 @@ export default function Hero() {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.25 }}
           className="flex items-center bg-white/90 backdrop-blur-2xl px-1.5 py-1.5 rounded-full shadow-[0_12px_40px_rgba(0,0,0,0.08)] border border-slate-200/40 max-w-full"
         >
-          <div className="w-9 h-9 rounded-full bg-white border border-slate-100 shadow-sm flex items-center justify-center shrink-0">
-            <span className="font-display text-[14px] font-semibold text-[#0a1b33]">
-              B
-            </span>
-          </div>
+          <img
+            src="/logo.png"
+            alt="Blakewebs"
+            className="w-9 h-9 rounded-xl shadow-sm shrink-0"
+          />
           <a
             href="#packs"
             className="hidden md:inline-block ml-2 px-3 py-2 text-[12px] font-semibold text-slate-500 hover:text-[#0a1b33] transition-colors"

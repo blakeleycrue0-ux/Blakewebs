@@ -25,11 +25,11 @@ export default function PrivacyPolicy() {
     <div className="min-h-screen w-full bg-[#f9fafb] px-3 sm:px-4 md:px-8 py-6 md:py-10">
       <header className="w-full max-w-[1400px] mx-auto flex items-center justify-between px-2">
         <a href="/" className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center shrink-0">
-            <span className="font-display text-[14px] font-semibold text-[#0a1b33]">
-              B
-            </span>
-          </div>
+          <img
+            src="/logo.png"
+            alt="Blakewebs"
+            className="w-9 h-9 rounded-xl shadow-sm shrink-0"
+          />
           <span className="font-display text-[14px] font-semibold text-[#0a1b33]">
             Blakewebs
           </span>
